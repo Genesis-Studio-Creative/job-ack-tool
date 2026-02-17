@@ -27,18 +27,19 @@ This tool helps streamline job assignment workflows by:
 ______________________________________________________________________________________________________________________________________
 Tech Stack
 
-Python
-SQLite
-Git & GitHub
-VS Code
+- Python
+- SQLite
+- Git & GitHub
+- VS Code
 
 ______________________________________________________________________________________________________________________________________
 Project Structure
-Job Ack Tool/
-src/        # Application source code
-docs/       # Documentation
-tests/      # Unit tests
-README.md   # Project overview
+
+- Job Ack Tool/
+- src/        # Application source code
+- docs/       # Documentation
+- tests/      # Unit tests
+- README.md   # Project overview
 
 ______________________________________________________________________________________________________________________________________
 Status
