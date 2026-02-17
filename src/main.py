@@ -1,4 +1,4 @@
-from database import init_db, insert_test_email
+from database import init_db, insert_test_email, get_all_emails
 
 if __name__ == "__main__":
     init_db()
@@ -6,3 +6,9 @@ if __name__ == "__main__":
 
     insert_test_email()
     print("Test email inserted successfully.")
+
+    emails = get_all_emails()
+
+    print("\nAll Emails in Database:")
+    for email in emails:
+        print(email)

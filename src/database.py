@@ -40,3 +40,14 @@ def insert_test_email():
 
     conn.commit()
     conn.close()
+
+def get_all_emails():
+    conn = sqlite3.connect("job_ack.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM emails")
+    rows = cursor.fetchall()
+
+    conn.close()
+    return rows
+
