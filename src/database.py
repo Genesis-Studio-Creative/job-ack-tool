@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import datetime
 
 DB_NAME = "job_ack.db"
 
@@ -18,6 +19,24 @@ def init_db():
             status TEXT
         )
     """)
+
+    conn.commit()
+    conn.close()  
+
+def insert_test_email():
+    conn = sqlite3.connect("job_ack.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        INSERT INTO emails (subject, sender, received_at, acknowledged_by, status)
+        VALUES (?, ?, ?, ?, ?)
+    """, (
+        "Test Job Email",
+        "test@example.com",
+        datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        None,
+        "Pending"
+    ))
 
     conn.commit()
     conn.close()
