@@ -43,5 +43,14 @@ README.md   # Project overview
 ______________________________________________________________________________________________________________________________________
 Status
 
-Project initialization phase.
 Development started on February 16, 2026.
+
+## Progress - Feb 16, 2026
+- Project initialization phase.
+
+
+## Progress - Feb 17, 2026
+- Database layer completed
+- Emails table created
+- Insert test email working
+- Fetch and display emails working
