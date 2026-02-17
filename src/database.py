@@ -1,11 +1,19 @@
 import sqlite3
+import os
 from datetime import datetime
 
 DB_NAME = "job_ack.db"
 
+# Get absolute path of this file's directory
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Absolute path to database file
+DB_PATH = os.path.join(BASE_DIR, "job_ack.db")
+
+
 def init_db():
     # Connect to SQLite database (creates file if not exists)
-    conn = sqlite3.connect(DB_NAME)
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
     # Create emails table
@@ -21,10 +29,12 @@ def init_db():
     """)
 
     conn.commit()
-    conn.close()  
+    conn.close()
+
 
 def insert_test_email():
-    conn = sqlite3.connect("job_ack.db")
+    # Connect to the SAME database file
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -41,8 +51,10 @@ def insert_test_email():
     conn.commit()
     conn.close()
 
+
 def get_all_emails():
-    conn = sqlite3.connect("job_ack.db")
+    # Fetch all emails from database
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
     cursor.execute("SELECT * FROM emails")
@@ -51,3 +63,17 @@ def get_all_emails():
     conn.close()
     return rows
 
+
+def acknowledge_email(email_id, acknowledged_by):
+    # Update email acknowledgement status
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        UPDATE emails
+        SET status = ?, acknowledged_by = ?
+        WHERE id = ?
+    """, ("Acknowledged", acknowledged_by, email_id))
+
+    conn.commit()
+    conn.close()
