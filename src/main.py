@@ -1,14 +1,8 @@
-from database import init_db, get_all_emails, acknowledge_email
+from email_service import list_emails, acknowledge
 
 if __name__ == "__main__":
-    init_db()
-    print("Database initialized successfully")
-
-    #insert_test_email()
-    #print("Test email inserted successfully.")
-
     # Show current emails
-    emails = get_all_emails()
+    emails = list_emails()
     print("\nCurrent Emails:")
     for email in emails:
         print(f"""
@@ -21,15 +15,15 @@ if __name__ == "__main__":
               --------------------------
               """)
 
-    # Take user input
-    email_id = int(input("Enter Email ID to Acknowledge: "))
+    # User input
+    email_id = int(input("\nEnter Email ID to Acknowledge: "))
     ack_by = input("Enter your Name: ")
 
-    acknowledge_email(email_id, ack_by)
-    print("\nEmail Acknowledged Successfully")
+    # Business logic handled by service layer
+    acknowledge(email_id, ack_by)
 
     # Show updated emails
-    updated_emails = get_all_emails()
+    updated_emails = list_emails()
     print("\nUpdated Emails:")
     for email in updated_emails:
         print(f"""
