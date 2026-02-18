@@ -69,6 +69,19 @@ def acknowledge_email(email_id, acknowledged_by):
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
+    cursor.execute("SELECT status FROM emails WHERE id = ?", (email_id,))
+    result = cursor.fetchone()
+
+    if not result:
+        print("Email ID not found.")
+        conn.close()
+        return
+    
+    if result[0] and result[0].strip().lower() == "acknowledged":
+        print("Email already acknowledged.")
+        conn.close()
+        return
+
     cursor.execute("""
         UPDATE emails
         SET status = ?, acknowledged_by = ?

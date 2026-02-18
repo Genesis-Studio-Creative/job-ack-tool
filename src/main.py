@@ -22,11 +22,11 @@ if __name__ == "__main__":
               """)
 
     # Take user input
-    email_id = int(input("Enter Email ID to acknowledge: "))
-    ack_by = input("Enter your name: ")
+    email_id = int(input("Enter Email ID to Acknowledge: "))
+    ack_by = input("Enter your Name: ")
 
     acknowledge_email(email_id, ack_by)
-    print("\nEmail acknowledged successfully")
+    print("\nEmail Acknowledged Successfully")
 
     # Show updated emails
     updated_emails = get_all_emails()
