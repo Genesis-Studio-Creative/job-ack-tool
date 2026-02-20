@@ -1,6 +1,11 @@
-from email_service import list_emails, acknowledge
+from email_service import list_emails, acknowledge, simulate_new_email, check_for_pending_emails
 
 if __name__ == "__main__":
+
+    simulate_new_email()
+
+    check_for_pending_emails()
+
     # Show current emails
     emails = list_emails()
     print("\nCurrent Emails:")

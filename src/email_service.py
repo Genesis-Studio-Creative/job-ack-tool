@@ -1,9 +1,13 @@
-# email_service.py
-from database import get_all_emails, acknowledge_email
+from datetime import datetime
+from database import get_all_emails, acknowledge_email, insert_email, get_pending_emails
 
-# -----------------------------
-# Business logic layer
-# -----------------------------
+def simulate_new_email():
+    subject = "New Job Alert"
+    sender = "hr@company.com"
+    received_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    insert_email(subject, sender, received_at)
+    print("New email simulated.")
 
 def list_emails():
     """
@@ -11,7 +15,6 @@ def list_emails():
     Returns a list of tuples.
     """
     return get_all_emails()
-
 
 def acknowledge(email_id, acknowledged_by):
     """
@@ -21,3 +24,11 @@ def acknowledge(email_id, acknowledged_by):
     """
     # Call the database function
     acknowledge_email(email_id, acknowledged_by)
+
+def check_for_pending_emails():
+    pending = get_pending_emails()
+
+    if pending:
+        print(f"\nYou have {len(pending)} unacknowledged email(s)!")
+    else:
+        print("\nNo pending emails.")    

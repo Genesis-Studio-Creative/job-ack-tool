@@ -32,21 +32,14 @@ def init_db():
     conn.close()
 
 
-def insert_test_email():
-    # Connect to the SAME database file
+def insert_email(subject, sender, received_at, status="Pending"):
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
     cursor.execute("""
         INSERT INTO emails (subject, sender, received_at, acknowledged_by, status)
         VALUES (?, ?, ?, ?, ?)
-    """, (
-        "Test Job Email",
-        "test@example.com",
-        datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        None,
-        "Pending"
-    ))
+    """, (subject, sender, received_at, None, status))
 
     conn.commit()
     conn.close()
@@ -90,3 +83,13 @@ def acknowledge_email(email_id, acknowledged_by):
 
     conn.commit()
     conn.close()
+
+def get_pending_emails():
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM emails WHERE status = 'Pending'")
+    rows = cursor.fetchall()
+
+    conn.close()
+    return rows
